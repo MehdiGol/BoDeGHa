@@ -1,0 +1,241 @@
+\documentclass[a4paper,twoside,openanay,11pt]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{natbib}
+\bibliographystyle{apa-good}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{geometry}
+   
+\geometry{reset,centering,total={130mm,210mm},includeheadfoot} 
+\setlength{\headheight}{14pt}
+
+
+\usepackage{todonotes}
+\usepackage{etoolbox}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{bigfoot}
+\usepackage{epigraph}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hhline}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{eurosym}
+\usepackage{gensymb}
+\usepackage{amsthm}
+\usepackage[toc,page]{appendix}
+\usepackage{pdfpages}
+
+\setlength{\epigraphwidth}{0.51\textwidth}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{usecaseinner}{Use Case}
+\newenvironment{usecase}[1]{%
+	\renewcommand\theusecaseinner{#1}%
+	\usecaseinner
+}{\endusecaseinner}
+%\lstset{basicstyle=\linespread{0.4}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\linespread{1}\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\newtoggle{hidecomments} %==false by default
+%\toggletrue{hidecomments} %uncomment this line to hide comments
+
+\iftoggle{hidecomments}{ % ignores comments but still defines the corresponding commands to prevent compiling errors
+	\newcommand{\adrien}[1]{}
+	\newcommand{\tom}[1]{}
+	\newcommand{\anis}[1]{}
+	\newcommand{\bruno}[1]{}
+	\newcommand{\gilles}[1]{}
+	\newcommand{\reviewer}[1]{}
+}{
+	\newcommand{\adrien}[1]{\todo[color=blue!40, inline]{\footnotesize{Adrien: #1}}}
+	\newcommand{\tom}[1]{\todo[color=red!40, inline]{\footnotesize{Tom: #1}}}
+	\newcommand{\anis}[1]{\todo[color=green!40, inline]{\footnotesize{Anis: #1}}}
+	\newcommand{\bruno}[1]{\todo[color=yellow!40, inline]{\footnotesize{Bruno: #1}}}
+	\newcommand{\gilles}[1]{\todo[color=gray!40, inline]{\footnotesize{Gilles: #1}}}
+	\newcommand{\reviewer}[1]{\todo[color=white!40, inline]{\footnotesize{Reviewer: #1}}}
+}
+
+\newcommand{\Csharp}{%
+	{\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\#}}}}
+
+\usepackage[acronym]{glossaries}
+
+
+\newacronym{aec}{AEC}{Architecture, Engineering and Construction}
+\newacronym{ad}{AD}{Algorithmic Design}
+\newacronym{cad}{CAD}{Computer-Aided Design}
+\newacronym{caad}{CAAD}{Computer-Aided Architectural Design}
+\newacronym{wimp}{WIMP}{Windows, Icons, Menus and Pointers}
+\newacronym{hmd}{HMD}{Head-Mounted Display}
+\newacronym{ar}{AR}{Augmented Reality}
+\newacronym{vr}{VR}{Virtual Reality}
+\newacronym{dse}{DSE}{Design Space Exploration}
+\newacronym{ga}{GA}{Genetic Algorithm}
+\newacronym{gan}{GAN}{Generative Adversarial Network}
+\newacronym{mr}{MR}{Mixed Reality}
+\newacronym{xr}{XR}{eXtended Reality}
+\newacronym{imu}{IMU}{Intertial Measurement Unit}
+\newacronym{bim}{BIM}{Building Information Modelling}
+\newacronym{gd}{GD}{Generative Design}
+\newacronym{rv}{RV}{Reality Virtuality}
+\newacronym{6dof}{6-DoF}{Six Degrees of Freedom}
+\newacronym{brep}{B-rep}{Boundary Representation}
+\newacronym{csg}{CSG}{Constructive Solid Geometry}
+\newacronym{nurbs}{NURBS}{Non-uniform rational B-spline}
+\newacronym{gdl}{GDL}{Geometric Description Language}
+\newacronym{vpl}{VPL}{Visual Programming Language}
+\newacronym{hci}{HCI}{Human-Computer Interaction}
+\newacronym{tcp}{TCP}{Transmission Control Protocol}
+\newacronym{tui}{TUI}{Tangible User Interface}
+\newacronym{mqtt}{MQTT}{Message Queuing Telemetry Transport}
+\newacronym{swot}{SWOT}{Strengths, Weaknesses, Opportunities, Threats}
+\newacronym{sdk}{SDK}{Software Development Kit}
+\newacronym{dag}{DAG}{Directed Acyclic Graph}
+\newacronym{gpm}{GPM}{Generalized Parametric Model}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{srgs}{SRGS}{Speech Recognition Grammar Specification}
+
+\usepackage{titlesec}
+\usepackage{titletoc}
+\titleformat{\chapter}[display]
+{\bfseries\huge}
+{\filleft\Large\MakeUppercase{\chaptertitlename} \  \rlap{ \resizebox{!}{0.8cm}{\thechapter} \rule{5cm}{1.2cm}}}
+{0ex}
+{%\titlerule
+	\vspace{2ex}%
+	\filleft}
+[\vspace{2ex}%
+%\startcontents%
+%\printcontents{l}{1}{\setcounter{tocdepth}{1}}%
+\titlerule%\setcounter{tocdepth}{2}%
+]
+
+\titleformat{\section}
+{\bfseries\Large}
+{\thesection.}
+{0.5em}
+{}
+[\vspace{0.5ex}
+\titlerule]
+
+\title{Automation tools in collaborative software development}
+
+\author{Mehdi Golzadeh}
+
+\newpagestyle{front}[\small]{
+	\headrule
+	\sethead[\usepage][][\textsl{\chaptertitle}]
+	{}{}{\usepage}}
+%  \setfoot[][\usepage][]
+%          {}{\usepage}{}}
+
+%Mainmatter Ruled header with info about current chapter and section
+\newpagestyle{main}[\small]{
+	\headrule
+	\sethead[\usepage][][\textsl{Chapter \thechapter \ -- \chaptertitle}]
+	{\thesection \ -- \sectiontitle}{}{\usepage}}
+
+
+
+%Backmatter, like main but without chapter number and section info
+\newpagestyle{back}[\small]{
+	\headrule
+	\sethead[\usepage][][\textsl{\chaptertitle}]
+	{}{}{\usepage}}
+
+\newpagestyle{ccl}[\small]{
+	\headrule
+	\sethead[\usepage][][\textsl{Chapter \thechapter \ -- \chaptertitle}]
+	{}{}{\usepage}} 
+
+%\includeonly{chapter4}
+\makeglossaries
+\setglossarypreamble[acronym]{Various acronyms will be used throughout this dissertation to abbreviate frequent terms, some of which will even find usages across all sections. The expansion will be given at least on the first occurrence of each acronym in the text, but the following list of acronyms can be used as a reference if needed.}
+
+\begin{document}
+
+\frontmatter
+
+\cleardoublepage
+\thispagestyle{empty}
+\input{cover.tex}
+\thispagestyle{empty}
+
+\pagestyle{front}
+\thispagestyle{empty}
+
+\input{acknowledgments.tex}
+
+\input{abstract.tex}
+	
+\tableofcontents
+%\printglossaries
+%\makeglossaries
+
+\mainmatter
+
+
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+
+% %TODO: fix references (inproceedings ->booktitle, etc)
+% \begin{appendices}
+% 	\chapter{GHXR evaluation protocol}	
+% 	\label{apx:ghxr-protocol}
+% 	\includepdf[scale=0.75, pages=-,offset=0 0]{ghxr-evaluation-protocol.pdf}
+% 	\chapter{GHXR System Usability Scale questionnaire}	
+% 	\label{apx:ghxr-sus}
+% 	\includepdf[scale=0.75, pages=-,offset=0 0]{ghxr-sus.pdf}
+	
+% \end{appendices}
+
+\backmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{sources}
+
+\clearpage
+
+\input{backcover.tex} 
+\end{document}
